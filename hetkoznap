@@ -14,3 +14,50 @@ hetkoznapok = ['hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek']
 legtobb_maganhangzo = max(hetkoznapok, maganhangzok_szama)
 
 print(f"A legtöbb magánhangzót tartalmazó nap: {legtobb_maganhangzo}")
+
+
+
+class Épület:
+    def __init__(self, név, város, ország, magasság, emelet, épült):
+        self.név = név
+        self.város = város
+        self.ország = ország
+        self.magasság = float(magasság)  # Konvertáljuk valós számmá
+        self.emelet = int(emelet)  # Konvertáljuk egész számmá
+        self.épült = int(épült)  # Konvertáljuk egész számmá
+
+# Adatok beolvasása a legmagasabb.txt állományból
+épületek = []
+with open("legmagasabb.txt", encoding="utf-8") as f:
+    next(f)  # Átugorjuk az első sort (fejléc)
+    for sor in f:
+        név, város, ország, magasság, emelet, épült = sor.strip().split(";")
+        épületek.append(Épület(név, város, ország, magasság, emelet, épült))
+
+# Hány épület található az állományban?
+épület_szám = len(épületek)
+print(f"Az állományban található épületek száma: {épület_szám}")
+
+# Emeletek összegzése
+ossz_emelet = sum(epulet.emelet for epulet in épületek)
+
+print(f"Az állományban található épületek emeleteinek összege: {ossz_emelet}")
+
+
+# A legmagasabb épület meghatározása
+legmagasabb_epulet = max(épületek, key=lambda x: x.magasság)
+
+print(f"A legmagasabb épület adatai:")
+print(f"Név: {legmagasabb_epulet.név}")
+print(f"Város: {legmagasabb_epulet.város}")
+print(f"Ország: {legmagasabb_epulet.ország}")
+print(f"Magasság (m): {legmagasabb_epulet.magasság}")
+print(f"Emeletek száma: {legmagasabb_epulet.emelet}")
+print(f"Épült: {legmagasabb_epulet.épült}")
+
+
+olasz_epuletek = [epulet for epulet in épületek if epulet.ország == "Olaszország"]
+if olasz_epuletek:
+    print(f"Az adatok között található olasz épület: {olasz_epuletek[0].név} ({olasz_epuletek[0].város}, {olasz_epuletek[0].ország})")
+else:
+    print("Az adatok között nincs olasz épület.")
