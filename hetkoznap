@@ -1,0 +1,16 @@
+def maganhangzok_szama(szoveg):
+    maganhangzok = 'aáeéiíoóöőuúüű'
+    szoveg = szoveg.lower()  # Átalakítjuk kisbetűssé, hogy ne kelljen külön kezelni az ékezetes változatokat
+    szamlalo = 0
+    for karakter in szoveg:
+        if karakter in maganhangzok:
+            szamlalo += 1
+    return szamlalo
+
+# Hétköznapok neveinek inicializálása
+hetkoznapok = ['hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek']
+
+# A legtöbb magánhangzót tartalmazó nap meghatározása
+legtobb_maganhangzo = max(hetkoznapok, maganhangzok_szama)
+
+print(f"A legtöbb magánhangzót tartalmazó nap: {legtobb_maganhangzo}")
